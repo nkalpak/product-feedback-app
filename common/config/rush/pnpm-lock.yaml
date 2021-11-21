@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@craco/craco': ^6.3.0
   '@hookform/resolvers': ^2.8.2
+  '@prisma/client': ~3.5.0
   '@rush-temp/client': file:./projects/client.tgz
   '@rush-temp/server': file:./projects/server.tgz
   '@rushstack/eslint-config': ^2.4.5
@@ -16,7 +17,6 @@ specifiers:
   '@testing-library/react': ^11.1.0
   '@testing-library/user-event': ^12.1.10
   '@types/jest': ^26.0.15
-  '@types/node': ^12.0.0
   '@types/react': ^17.0.0
   '@types/react-dom': ^17.0.0
   '@types/react-helmet': ^6.1.3
@@ -24,8 +24,8 @@ specifiers:
   babel-loader: 8.1.0
   esbuild: ^0.13.4
   eslint: ^7.32.0
-  eslint-plugin-prettier: ^4.0.0
   nanoid: ^3.1.29
+  prisma: ~3.5.0
   react: ^17.0.2
   react-dom: ^17.0.2
   react-error-boundary: ^3.1.3
@@ -34,6 +34,7 @@ specifiers:
   react-location: ^3.2.8
   react-query: ^3.25.0
   react-scripts: 4.0.3
+  serverless-dotenv-plugin: ~3.10.0
   theme-ui: ^0.11.3
   tsconfig-paths-webpack-plugin: ^3.5.1
   type-fest: ^2.3.4
@@ -46,6 +47,7 @@ specifiers:
 dependencies:
   '@craco/craco': 6.4.1_906008ca5dec88fdc039e1ef6664f874
   '@hookform/resolvers': 2.8.3_react-hook-form@7.20.2
+  '@prisma/client': 3.5.0_prisma@3.5.0
   '@rush-temp/client': file:projects/client.tgz
   '@rush-temp/server': file:projects/server.tgz
   '@rushstack/eslint-config': 2.4.5_eslint@7.32.0+typescript@4.5.2
@@ -59,7 +61,6 @@ dependencies:
   '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
   '@testing-library/user-event': 12.8.3
   '@types/jest': 26.0.24
-  '@types/node': 12.20.37
   '@types/react': 17.0.35
   '@types/react-dom': 17.0.11
   '@types/react-helmet': 6.1.4
@@ -67,8 +68,8 @@ dependencies:
   babel-loader: 8.1.0_webpack@4.44.2
   esbuild: 0.13.15
   eslint: 7.32.0
-  eslint-plugin-prettier: 4.0.0_eslint@7.32.0
   nanoid: 3.1.30
+  prisma: 3.5.0
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
   react-error-boundary: 3.1.4_react@17.0.2
@@ -77,6 +78,7 @@ dependencies:
   react-location: 3.2.8_react-dom@17.0.2+react@17.0.2
   react-query: 3.33.2_react-dom@17.0.2+react@17.0.2
   react-scripts: 4.0.3_96f1e36998c5a180b9c0aafc96ecae7b
+  serverless-dotenv-plugin: 3.10.0
   theme-ui: 0.11.3_812c4b915b618d5091ca1e8ce4566766
   tsconfig-paths-webpack-plugin: 3.5.2
   type-fest: 2.5.4
@@ -4352,6 +4354,29 @@ packages:
     resolution: {integrity: sha512-IXf3XA7+XyN7CP9gGh/XB0UxVMlvARGEgGXLubFICsUMGz6Q+DU+i4gGlpOxTjKvXjkJDJC8YdqdKkDj9qZHEQ==}
     dev: false
 
+  /@prisma/client/3.5.0_prisma@3.5.0:
+    resolution: {integrity: sha512-LuaaisknLe9CCfJ1Rtqe9b9knvPgEEcC77OMmWdo3fSanxl5oTDxcH3IIhpULQQlJfZvDcaEXuXNU4dsNF+q1w==}
+    engines: {node: '>=12.6'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      '@prisma/engines-version': 3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e
+      prisma: 3.5.0
+    dev: false
+
+  /@prisma/engines-version/3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e:
+    resolution: {integrity: sha512-X16YmBmj7Omso4ZbkNBe6gPYlNcnwZMUPtXsguCkn+KoMqm3DJD9M4X31gx0Gf13Q44dY3SKPJZUk44/XUj/WA==}
+    dev: false
+
+  /@prisma/engines/3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e:
+    resolution: {integrity: sha512-MqZUrxuLlIbjB3wu8LrRJOKcvR4k3dunKoI4Q2bPfAwLQY0XlpsLZ3TRVW1c32ooVk939p6iGNkaCUo63Et36g==}
+    requiresBuild: true
+    dev: false
+
   /@reach/router/1.3.4_react-dom@17.0.2+react@17.0.2:
     resolution: {integrity: sha512-+mtn9wjlB9NN2CNnnC/BRYtwdKBfSyyasPYraNAyvaV1occr/5NnB4CVzjEZipNHwYebQwcndGUmpFzxAUoqSA==}
     peerDependencies:
@@ -6390,6 +6415,10 @@ packages:
 
   /@types/node/14.17.34:
     resolution: {integrity: sha512-USUftMYpmuMzeWobskoPfzDi+vkpe0dvcOBRNOscFrGxVp4jomnRxWuVohgqBow2xyIPC0S3gjxV/5079jhmDg==}
+    dev: false
+
+  /@types/node/16.11.9:
+    resolution: {integrity: sha512-MKmdASMf3LtPzwLyRrFjtFFZ48cMf8jmX5VRYrDQiJa8Ybu5VAmkqBWqKU8fdCwD8ysw4mQ9nrEHvzg6gunR7A==}
     dev: false
 
   /@types/normalize-package-data/2.4.1:
@@ -8692,6 +8721,19 @@ packages:
       toggle-selection: 1.0.6
     dev: false
 
+  /copyfiles/2.4.1:
+    resolution: {integrity: sha512-fereAvAvxDrQDOXybk3Qu3dPbOoKoysFMWtkY3mv5BsL8//OSZVL5DCLYqgRfY5cWirgRzlC+WSrxp6Bo3eNZg==}
+    hasBin: true
+    dependencies:
+      glob: 7.2.0
+      minimatch: 3.0.4
+      mkdirp: 1.0.4
+      noms: 0.0.0
+      through2: 2.0.5
+      untildify: 4.0.0
+      yargs: 16.2.0
+    dev: false
+
   /core-js-compat/3.19.1:
     resolution: {integrity: sha512-Q/VJ7jAF/y68+aUsQJ/afPOewdsGkDtcMb40J8MbuWKlK3Y+wtHq8bTHKPj2WKWLIqmS5JhHs4CzHtz6pT2W6g==}
     dependencies:
@@ -9501,6 +9543,11 @@ packages:
     dependencies:
       dotenv-defaults: 1.1.1
       webpack: 4.44.2
+    dev: false
+
+  /dotenv/10.0.0:
+    resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
+    engines: {node: '>=10'}
     dev: false
 
   /dotenv/6.2.0:
@@ -12208,6 +12255,10 @@ packages:
       is-docker: 2.2.1
     dev: false
 
+  /isarray/0.0.1:
+    resolution: {integrity: sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=}
+    dev: false
+
   /isarray/1.0.0:
     resolution: {integrity: sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=}
     dev: false
@@ -13801,6 +13852,13 @@ packages:
     resolution: {integrity: sha512-4a5FH4WLi+daH/CGD5o/JWRR8W5tlCkd3nrDSkxbOzscJTyTUITltvOJeQjg3HJ1YgEuNyiPhQbvbtRjkQBByQ==}
     dev: false
 
+  /noms/0.0.0:
+    resolution: {integrity: sha1-2o69nzr51nYJGbJ9nNyAkqczKFk=}
+    dependencies:
+      inherits: 2.0.4
+      readable-stream: 1.0.34
+    dev: false
+
   /normalize-package-data/2.5.0:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
     dependencies:
@@ -15218,6 +15276,15 @@ packages:
     engines: {node: '>= 0.8'}
     dev: false
 
+  /prisma/3.5.0:
+    resolution: {integrity: sha512-WEYQ+H98O0yigG+lI0gfh4iyBChvnM6QTXPDtY9eFraLXAmyb6tf/T2mUdrUAU1AEvHLVzQA5A+RpONZlQozBg==}
+    engines: {node: '>=12.6'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e
+    dev: false
+
   /prismjs/1.25.0:
     resolution: {integrity: sha512-WCjJHl1KEWbnkQom1+SzftbtXMKQoezOCYs5rECqMN+jP+apI7ftoflyqigqzopSO3hMhTEb0mFClA8lkolgEg==}
     dev: false
@@ -15905,6 +15972,15 @@ packages:
       type-fest: 0.6.0
     dev: false
 
+  /readable-stream/1.0.34:
+    resolution: {integrity: sha1-Elgg40vIQtLyqq+v5MKRbuMsFXw=}
+    dependencies:
+      core-util-is: 1.0.3
+      inherits: 2.0.4
+      isarray: 0.0.1
+      string_decoder: 0.10.31
+    dev: false
+
   /readable-stream/2.3.7:
     resolution: {integrity: sha512-Ebho8K4jIbHAxnuxi7o42OrZgF/ZTNcsZj6nRKyUmkhLFq8CHItp/fy6hQZuZmP/n3yZ9VBUbp4zz/mX8hmYPw==}
     dependencies:
@@ -16569,6 +16645,16 @@ packages:
       send: 0.17.1
     dev: false
 
+  /serverless-dotenv-plugin/3.10.0:
+    resolution: {integrity: sha512-u4/Yh/61alhkd3d/aF2+wNwRGgGgrN1KpMz8IhwsMNS0AsoJDhmRl/BTuDqHCCdYcteQw9d4crgEIGVPDlc8jw==}
+    peerDependencies:
+      serverless: 1 || 2
+    dependencies:
+      chalk: 4.1.2
+      dotenv: 10.0.0
+      dotenv-expand: 5.1.0
+    dev: false
+
   /set-blocking/2.0.0:
     resolution: {integrity: sha1-BF+XgtARrppoA93TgrJDkrPYkPc=}
     dev: false
@@ -17044,6 +17130,10 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.3
+    dev: false
+
+  /string_decoder/0.10.31:
+    resolution: {integrity: sha1-YuIDvEF2bGwoyfyEMB2rHFMQ+pQ=}
     dev: false
 
   /string_decoder/1.1.1:
@@ -17914,6 +18004,11 @@ packages:
     dependencies:
       has-value: 0.3.1
       isobject: 3.0.1
+    dev: false
+
+  /untildify/4.0.0:
+    resolution: {integrity: sha512-KK8xQ1mkzZeg9inewmFVDNkg3l5LUhoq9kN6iWYB/CC9YMG8HA+c1Q8HwDe6dEX7kErrEVNVBO3fWsVq5iDgtw==}
+    engines: {node: '>=8'}
     dev: false
 
   /upath/1.2.0:
@@ -18814,7 +18909,7 @@ packages:
     dev: false
 
   file:projects/client.tgz:
-    resolution: {integrity: sha512-0QTLKY7d+57dpIEhFvgBd4BAip8yN76xCeaYFzJcnh5OS+WJFoCXvJa75mxm8RVwJpEsMu7TjX6SLxdoICDp2w==, tarball: file:projects/client.tgz}
+    resolution: {integrity: sha512-W0y+5MwxLRWOsQ8UGSWa5/Duw2qNfJWBwyFUnbetFsx1gTCWKOpvU3Wm+9PcEXzCkG9s9ozuhJmOxj4ckIfLAg==, tarball: file:projects/client.tgz}
     name: '@rush-temp/client'
     version: 0.0.0
     dependencies:
@@ -18873,12 +18968,10 @@ packages:
       - bufferutil
       - canvas
       - debug
-      - eslint-config-prettier
       - fibers
       - lit
       - lit-html
       - node-sass
-      - prettier
       - react-native
       - react-refresh
       - sass
@@ -18898,14 +18991,20 @@ packages:
     dev: false
 
   file:projects/server.tgz:
-    resolution: {integrity: sha512-Kn75dVPqe+DSybevguIUIvuBMLMYvJgP4iRtpR8lkhL0cUX3k/0EMUmXE2aPIFo50YZp91Q+tluBN1LMficvJg==, tarball: file:projects/server.tgz}
+    resolution: {integrity: sha512-ggKIDnF+yRUKeWHoGPw1vYvo8VBmVoGy05/nblnG32dqndDDDzuwW6X2cwS5wzjinMYEfVX45d3xrnVkjR6Zsg==, tarball: file:projects/server.tgz}
     name: '@rush-temp/server'
     version: 0.0.0
     dependencies:
+      '@prisma/client': 3.5.0_prisma@3.5.0
       '@rushstack/eslint-config': 2.4.5_eslint@7.32.0+typescript@4.5.2
+      '@types/node': 16.11.9
+      copyfiles: 2.4.1
       esbuild: 0.13.15
       eslint: 7.32.0
+      prisma: 3.5.0
+      serverless-dotenv-plugin: 3.10.0
       typescript: 4.5.2
     transitivePeerDependencies:
+      - serverless
       - supports-color
     dev: false

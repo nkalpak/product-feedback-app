@@ -21,6 +21,15 @@
 
       // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
       "shellCommand": "pretty-quick --staged"
+    },
+    {
+      "commandKind": "bulk",
+      "name": "postinstall",
+      "summary": "Run all postinstall scripts",
+      "ignoreMissingScript": true,
+      "enableParallelism": true,
+      "ignoreDependencyOrder": true,
+      "safeForSimultaneousRushProcesses": true
     }
     // {
     //   /**
