@@ -5,7 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [1.1.4](https://github.com/nkalpak/monorepo-boilerplate/compare/v1.1.3...v1.1.4) (2021-10-09)
 
-**Note:** Version bump only for package @walnut/server
+**Note:** Version bump only for package @pfa/server
 
 
 
@@ -13,7 +13,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [1.1.3](https://github.com/nkalpak/monorepo-boilerplate/compare/v1.1.1...v1.1.3) (2021-10-09)
 
-**Note:** Version bump only for package @walnut/server
+**Note:** Version bump only for package @pfa/server
 
 
 
@@ -21,7 +21,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [1.1.2](https://github.com/nkalpak/monorepo-boilerplate/compare/v1.1.1...v1.1.2) (2021-10-04)
 
-**Note:** Version bump only for package @walnut/server
+**Note:** Version bump only for package @pfa/server
 
 
 
@@ -40,7 +40,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [1.0.2](https://github.com/nkalpak/monorepo-boilerplate/compare/v1.0.1...v1.0.2) (2021-10-03)
 
-**Note:** Version bump only for package @walnut/server
+**Note:** Version bump only for package @pfa/server
 
 
 
@@ -48,4 +48,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 1.0.1 (2021-10-03)
 
-**Note:** Version bump only for package @walnut/server
+**Note:** Version bump only for package @pfa/server

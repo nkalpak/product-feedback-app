@@ -381,11 +381,11 @@
    */
   "projects": [
     {
-      "packageName": "@walnut/client",
+      "packageName": "@pfa/client",
       "projectFolder": "apps/client"
     },
     {
-      "packageName": "@walnut/server",
+      "packageName": "@pfa/server",
       "projectFolder": "apps/server"
     }
     // {

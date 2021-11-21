@@ -1,4 +1,4 @@
-service: test-app
+service: pfa
 
 provider:
   name: aws

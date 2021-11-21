@@ -1,5 +1,5 @@
 {
-  "name": "@walnut/server",
+  "name": "@pfa/server",
   "version": "1.1.4",
   "main": "dist/index.js",
   "license": "MIT",
