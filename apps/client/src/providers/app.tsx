@@ -7,7 +7,7 @@ import * as ThemeUi from 'theme-ui';
 import { Notifications } from '@/components/notifications';
 import { queryClient } from '@/lib/react-query';
 import { theme } from '@/lib/theme-ui';
-import { Router } from "@/lib/react-location";
+import { Router } from '@/lib/react-location';
 
 type AppProviderProps = {
   children: React.ReactNode;

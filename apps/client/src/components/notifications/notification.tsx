@@ -1,13 +1,13 @@
 import * as ThemeUi from 'theme-ui';
 
-type NotificationProps = {
+interface INotificationProps {
   title: string;
   description: string;
   severity?: 'error' | 'warning' | 'info';
-};
+}
 
 const NOTIFICATION_SEVERITIES: Record<
-  Required<NotificationProps>['severity'],
+  Required<INotificationProps>['severity'],
   ThemeUi.ThemeUIStyleObject
 > = {
   error: {
@@ -22,7 +22,7 @@ const NOTIFICATION_SEVERITIES: Record<
   },
 };
 
-export function Notification({ title, description, severity = 'info' }: NotificationProps) {
+export function Notification({ title, description, severity = 'info' }: INotificationProps) {
   return (
     <ThemeUi.Box
       sx={{
