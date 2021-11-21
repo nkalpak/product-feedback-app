@@ -1,0 +1,20 @@
+{
+  "name": "@walnut/server",
+  "version": "1.1.4",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "compile": "node_modules/.bin/tsc",
+    "lint": "eslint --fix --ext .js,.ts,.tsx ./src --ignore-path .gitignore && git add .",
+    "precommit": "yarn lint",
+    "build": "yarn compile && node esbuild.js"
+  },
+  "dependencies": {
+    "typescript": "^4.4.3"
+  },
+  "devDependencies": {
+    "esbuild": "^0.13.4",
+    "eslint": "^7.32.0",
+    "@rushstack/eslint-config": "^2.4.5"
+  }
+}

@@ -1,0 +1,22 @@
+service: test-app
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+
+package:
+  patterns:
+    - 'lib/**'
+    - '!node_modules'
+    - '!dist'
+    - '!src/**'
+
+functions:
+  hello:
+    handler: lib/handler.helloWorldHandler
+    events:
+      - http:
+          path: hello
+          method: GET
+          cors: true
