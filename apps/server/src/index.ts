@@ -1,3 +1,3 @@
-import * as HelloWorld from './features/hello-world';
+import * as ProductRequest from './features/product-request';
 
-export const helloWorldHandler = HelloWorld.handler;
+export { ProductRequest };
