@@ -5,39 +5,38 @@ import * as ThemeUi from 'theme-ui';
 import { Form } from './Form';
 import { InputField } from './InputField';
 import { SelectField } from './SelectField';
-import { TextAreaField } from './TextareaField';
+import { UnpackNestedValue } from 'react-hook-form';
+import { Button } from '@/components/button/button';
 
-type FormValues = {
+interface IFormValues {
   title: string;
   description: string;
   type: string;
   content: string;
-};
+}
 
-const MyForm = ({ hideSubmit = false }: { hideSubmit?: boolean }) => {
+function MyForm({ hideSubmit = false }: { hideSubmit?: boolean }): JSX.Element {
+  function handleSubmit(values: UnpackNestedValue<IFormValues>): void {
+    alert(JSON.stringify(values, null, 2));
+  }
+
   return (
-    <Form<FormValues>
-      onSubmit={async (values) => {
-        alert(JSON.stringify(values, null, 2));
-      }}
-      id="my-form"
-    >
-      {({ register, formState }) => (
-        <>
+    <Form<IFormValues> onSubmit={handleSubmit} id="my-form">
+      {({ register, formState, control }) => (
+        <React.Fragment>
           <InputField
+            description="The title of the thing"
             label="Title"
-            error={formState.errors['title']}
+            error={formState.errors.title}
             registration={register('title')}
           />
-          <TextAreaField
-            label="Description"
-            error={formState.errors['description']}
-            registration={register('description')}
-          />
+
           <SelectField
+            placeholder="Team"
+            description="Which team is this in?"
             label="Team"
-            error={formState.errors['type']}
-            registration={register('type')}
+            control={control}
+            name="team"
             options={['A', 'B', 'C'].map((type) => ({
               label: type,
               value: type,
@@ -45,17 +44,15 @@ const MyForm = ({ hideSubmit = false }: { hideSubmit?: boolean }) => {
           />
 
           {!hideSubmit && (
-            <div>
-              <ThemeUi.Button type="submit" className="w-full">
-                Submit
-              </ThemeUi.Button>
-            </div>
+            <ThemeUi.Box sx={{ mt: 4 }}>
+              <Button type="submit">Submit</Button>
+            </ThemeUi.Box>
           )}
-        </>
+        </React.Fragment>
       )}
     </Form>
   );
-};
+}
 
 const meta: Meta = {
   title: 'Components/Form',
@@ -69,5 +66,5 @@ export default meta;
 
 const Template: Story = () => <MyForm />;
 
-export const Default = Template.bind({});
+export const Default: typeof Template = Template.bind({});
 Default.args = {};

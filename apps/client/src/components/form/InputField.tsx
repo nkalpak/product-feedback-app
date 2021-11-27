@@ -1,7 +1,7 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
-import * as ThemeUi from 'theme-ui';
 
 import { FieldWrapper, FieldWrapperPassThroughProps } from './FieldWrapper';
+import { TextInput } from '@/components/text-input/text-input';
 
 type InputFieldProps = FieldWrapperPassThroughProps & {
   type?: 'text' | 'email' | 'password';
@@ -9,11 +9,17 @@ type InputFieldProps = FieldWrapperPassThroughProps & {
   registration: Partial<UseFormRegisterReturn>;
 };
 
-export function InputField(props: InputFieldProps) {
-  const { type = 'text', label, className, registration, error } = props;
+export function InputField({
+  className,
+  error,
+  description,
+  label,
+  registration,
+  type,
+}: InputFieldProps): JSX.Element {
   return (
-    <FieldWrapper label={label} error={error}>
-      <ThemeUi.Input type={type} className={className} {...registration} />
+    <FieldWrapper description={description} label={label} error={error}>
+      <TextInput type={type} className={className} {...registration} />
     </FieldWrapper>
   );
 }

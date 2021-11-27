@@ -111,4 +111,17 @@ export const theme: Theme = {
       lineHeight: '19px',
     },
   },
+
+  forms: {
+    baseField: {
+      border: 'none',
+      fontFamily: 'body',
+      fontSize: `${15 / 16}rem`,
+      color: 'darkgrey.medium',
+      px: 6,
+      py: 3,
+      backgroundColor: 'lightgrey',
+      borderRadius: '5px',
+    },
+  },
 };

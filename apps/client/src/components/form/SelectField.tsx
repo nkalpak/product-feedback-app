@@ -1,39 +1,44 @@
 import * as React from 'react';
-import { UseFormRegisterReturn } from 'react-hook-form';
-import * as ThemeUi from 'theme-ui';
+import { Control, useController } from 'react-hook-form';
 
 import { FieldWrapper, FieldWrapperPassThroughProps } from './FieldWrapper';
+import { Select } from '@/components/select/select';
 
-type Option = {
-  label: React.ReactNode;
-  value: string | number | string[];
-};
+interface IOption {
+  label: string;
+  value: string;
+}
 
-type SelectFieldProps = FieldWrapperPassThroughProps & {
-  options: Option[];
-  className?: string;
-  defaultValue?: string;
+interface ISelectFieldProps extends Omit<FieldWrapperPassThroughProps, 'error'> {
+  options: IOption[];
+  control: Control<any>;
+  name: string;
+  label?: string;
   placeholder?: string;
-  registration: Partial<UseFormRegisterReturn>;
-};
+}
 
-export function SelectField(props: SelectFieldProps) {
-  const { label, options, error, className, defaultValue, registration, placeholder } = props;
+export function SelectField({
+  control,
+  options,
+  name,
+  label,
+  description,
+  placeholder,
+}: ISelectFieldProps): JSX.Element {
+  const {
+    field: { value, onChange, onBlur },
+    fieldState: { error },
+  } = useController({ control, name });
+
   return (
-    <FieldWrapper label={label} error={error}>
-      <ThemeUi.Select
+    <FieldWrapper description={description} label={label} error={error}>
+      <Select
         placeholder={placeholder}
-        name="location"
-        className={className}
-        defaultValue={defaultValue}
-        {...registration}
-      >
-        {options.map(({ label, value }) => (
-          <option key={label?.toString()} value={value}>
-            {label}
-          </option>
-        ))}
-      </ThemeUi.Select>
+        onBlur={onBlur}
+        value={value}
+        onChange={onChange}
+        options={options.map(({ label, value }) => ({ label, value }))}
+      />
     </FieldWrapper>
   );
 }
