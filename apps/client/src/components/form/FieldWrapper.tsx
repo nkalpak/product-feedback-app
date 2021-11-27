@@ -56,7 +56,7 @@ export function FieldWrapper({
           )}
         </ThemeUi.Box>
 
-        <div className="mt-1">{children}</div>
+        <div>{children}</div>
       </ThemeUi.Label>
 
       {error?.message && (

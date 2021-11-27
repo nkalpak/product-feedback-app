@@ -33,7 +33,7 @@ export function Form<
       id={id}
       sx={{
         flexDirection: 'column',
-        gap: 4,
+        gap: 6,
       }}
     >
       {children(methods)}

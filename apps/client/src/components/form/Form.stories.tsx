@@ -7,6 +7,7 @@ import { InputField } from './InputField';
 import { SelectField } from './SelectField';
 import { UnpackNestedValue } from 'react-hook-form';
 import { Button } from '@/components/button/button';
+import { TextAreaField } from '@/components/form/TextareaField';
 
 interface IFormValues {
   title: string;
@@ -41,6 +42,12 @@ function MyForm({ hideSubmit = false }: { hideSubmit?: boolean }): JSX.Element {
               label: type,
               value: type,
             }))}
+          />
+
+          <TextAreaField
+            label="Description"
+            description="Provide a short description"
+            registration={register('description')}
           />
 
           {!hideSubmit && (

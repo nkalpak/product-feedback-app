@@ -1,18 +1,24 @@
+/** @jsxImportSource theme-ui */
 import { UseFormRegisterReturn } from 'react-hook-form';
-import * as ThemeUi from 'theme-ui';
 
 import { FieldWrapper, FieldWrapperPassThroughProps } from './FieldWrapper';
+import { Textarea } from '@/components/textarea/textarea';
 
 type TextAreaFieldProps = FieldWrapperPassThroughProps & {
   className?: string;
   registration: Partial<UseFormRegisterReturn>;
 };
 
-export function TextAreaField(props: TextAreaFieldProps) {
-  const { label, className, registration, error } = props;
+export function TextAreaField({
+  label,
+  registration,
+  error,
+  className,
+  description,
+}: TextAreaFieldProps): JSX.Element {
   return (
-    <FieldWrapper label={label} error={error}>
-      <ThemeUi.Textarea className={className} {...registration} />
+    <FieldWrapper description={description} label={label} error={error}>
+      <Textarea className={className} {...registration} sx={{ width: '100%' }} />
     </FieldWrapper>
   );
 }
