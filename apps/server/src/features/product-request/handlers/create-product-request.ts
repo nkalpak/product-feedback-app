@@ -1,7 +1,7 @@
 import mysql from 'mysql2/promise';
 import { Environment } from '../../../global/environment';
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { ProductRequestParser } from '../parsers/product-request';
+import { Api } from '@pfa/api';
 
 const pool: mysql.Pool = mysql.createPool({
   connectionLimit: 1,
@@ -15,7 +15,7 @@ const pool: mysql.Pool = mysql.createPool({
 async function createProductRequest(event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
   try {
     if (!event.body) return { statusCode: 400, body: 'Bad request' };
-    const { upvotes, category, title, description, status } = ProductRequestParser.parse(
+    const { upvotes, category, title, description, status } = Api.ProductRequest.ProductRequestParser.parse(
       JSON.parse(event.body)
     );
 

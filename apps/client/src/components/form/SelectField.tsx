@@ -15,6 +15,7 @@ interface ISelectFieldProps extends Omit<FieldWrapperPassThroughProps, 'error'> 
   name: string;
   label?: string;
   placeholder?: string;
+  defaultValue?: string;
 }
 
 export function SelectField({
@@ -24,11 +25,12 @@ export function SelectField({
   label,
   description,
   placeholder,
+  defaultValue,
 }: ISelectFieldProps): JSX.Element {
   const {
     field: { value, onChange, onBlur },
     fieldState: { error },
-  } = useController({ control, name });
+  } = useController({ control, name, defaultValue });
 
   return (
     <FieldWrapper description={description} label={label} error={error}>

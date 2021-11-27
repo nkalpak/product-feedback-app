@@ -60,10 +60,10 @@ export function FieldWrapper({
       </ThemeUi.Label>
 
       {error?.message && (
-        <ThemeUi.Box role="alert" aria-label={error.message}>
+        <ThemeUi.Box role="alert" aria-label={error.message} sx={{ mt: 1 }}>
           <ThemeUi.Text
             sx={{
-              fontSize: 'md',
+              fontSize: 'sm',
               color: 'danger',
               fontFamily: 'body',
             }}

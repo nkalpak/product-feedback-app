@@ -1,21 +1,35 @@
 import * as ThemeUi from 'theme-ui';
+import React, { ForwardRefExoticComponent } from 'react';
 
-interface ITextInputProps extends ThemeUi.InputProps {}
+interface ITextInputProps extends ThemeUi.InputProps {
+  isError?: boolean;
+}
 
-export function TextInput({ sx, ...delegated }: ITextInputProps): JSX.Element {
+export const TextInput: ForwardRefExoticComponent<ITextInputProps> = React.forwardRef<
+  HTMLInputElement,
+  ITextInputProps
+>(({ sx, isError, ...delegated }, ref): JSX.Element => {
   return (
     <ThemeUi.Input
+      ref={ref}
       type="text"
       variant="baseField"
       {...delegated}
       sx={{
-        '&:active, &:focus': {
-          outline: '1px solid',
-          outlineColor: 'secondary',
-        },
+        ...(isError
+          ? {
+              outline: '1px solid',
+              outlineColor: 'danger',
+            }
+          : {
+              '&:active, &:focus': {
+                outline: '1px solid',
+                outlineColor: 'secondary',
+              },
+            }),
 
         ...sx,
       }}
     />
   );
-}
+});

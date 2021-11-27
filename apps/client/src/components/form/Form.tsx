@@ -25,6 +25,7 @@ export function Form<
   schema,
 }: IFormProps<TFormValues, Schema>): JSX.Element {
   const methods = useForm<TFormValues>({ ...options, resolver: schema && zodResolver(schema) });
+
   return (
     <ThemeUi.Flex
       className={className}

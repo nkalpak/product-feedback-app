@@ -387,6 +387,10 @@
     {
       "packageName": "@pfa/server",
       "projectFolder": "apps/server"
+    },
+    {
+      "packageName": "@pfa/api",
+      "projectFolder": "lib/api"
     }
     // {
     //   /**

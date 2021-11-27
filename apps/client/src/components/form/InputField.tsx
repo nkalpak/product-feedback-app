@@ -19,7 +19,12 @@ export function InputField({
 }: InputFieldProps): JSX.Element {
   return (
     <FieldWrapper description={description} label={label} error={error}>
-      <TextInput type={type} className={className} {...registration} />
+      <TextInput
+        type={type}
+        className={className}
+        {...registration}
+        isError={Boolean(error?.message)}
+      />
     </FieldWrapper>
   );
 }

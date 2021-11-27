@@ -18,7 +18,12 @@ export function TextAreaField({
 }: TextAreaFieldProps): JSX.Element {
   return (
     <FieldWrapper description={description} label={label} error={error}>
-      <Textarea className={className} {...registration} sx={{ width: '100%' }} />
+      <Textarea
+        className={className}
+        {...registration}
+        sx={{ width: '100%' }}
+        isError={Boolean(error?.message)}
+      />
     </FieldWrapper>
   );
 }
