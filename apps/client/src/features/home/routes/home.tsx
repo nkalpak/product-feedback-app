@@ -1,5 +1,5 @@
-import { CreateNewFeedbackForm } from '@/features/product-feedback/components';
+import { Link } from 'react-location';
 
 export function Home(): JSX.Element {
-  return <CreateNewFeedbackForm />;
+  return <Link to="/create-new-feedback">Home!!</Link>;
 }

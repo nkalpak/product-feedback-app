@@ -6,6 +6,17 @@ export const theme: Theme = {
       '*, *:before, *:after': {
         'box-sizing': 'border-box',
       },
+      backgroundColor: 'lightgrey',
+      height: '100%',
+
+      '& body': {
+        height: '100%',
+      },
+
+      '& #root': {
+        minHeight: '100%',
+        display: 'flex',
+      },
     },
   },
 
@@ -122,6 +133,17 @@ export const theme: Theme = {
       py: 3,
       backgroundColor: 'lightgrey',
       borderRadius: '5px',
+    },
+  },
+
+  layout: {
+    container: {
+      maxWidth: 1100,
+    },
+    pageForm: {
+      alignSelf: 'center',
+      maxWidth: 540,
+      mx: [6, 'auto'],
     },
   },
 };

@@ -1,9 +1,12 @@
 import * as R from 'remeda';
 import * as ThemeUi from 'theme-ui';
+import * as Location from 'react-location';
 import { Form, InputField, SelectField, TextAreaField } from '@/components/form';
 import { Api } from '@pfa/api';
 import React from 'react';
 import { Button } from '@/components/button/button';
+import { UseFormReturn, useWatch } from 'react-hook-form';
+import { LocationGenerics } from '@/lib/react-location';
 
 type IFormData = Pick<Api.ProductRequest.IProductRequest, 'title' | 'category' | 'description'>;
 
@@ -16,10 +19,23 @@ const categories: Record<Api.ProductRequest.ICategory, string> = {
 };
 
 export function CreateNewFeedbackForm(): JSX.Element {
+  const search = Location.useSearch<LocationGenerics>();
+  const navigate = Location.useNavigate<LocationGenerics>();
+
+  function onCancel(): void {
+    navigate({ to: '/' });
+  }
+
   return (
-    <Form<IFormData> schema={Api.ProductRequest.ProductRequestParser} onSubmit={console.log}>
+    <Form<IFormData>
+      schema={Api.ProductRequest.ProductRequestParser}
+      options={{ defaultValues: search.createNewFeedback }}
+      onSubmit={console.log}
+    >
       {({ register, control, formState }) => (
         <React.Fragment>
+          <FormQueryStatePersist control={control} />
+
           <InputField
             registration={register('title')}
             error={formState.errors.title}
@@ -46,8 +62,14 @@ export function CreateNewFeedbackForm(): JSX.Element {
             description="Include any specific comments on what should be improved, added, etc."
           />
 
-          <ThemeUi.Flex sx={{ gap: 4, alignSelf: 'flex-end' }}>
-            <Button type="button" color="tertiary">
+          <ThemeUi.Flex
+            sx={{
+              gap: 4,
+              alignSelf: ['auto', 'flex-end'],
+              flexDirection: ['column-reverse', 'row'],
+            }}
+          >
+            <Button onClick={onCancel} type="button" color="tertiary">
               Cancel
             </Button>
             <Button type="submit">Add feedback</Button>
@@ -56,4 +78,24 @@ export function CreateNewFeedbackForm(): JSX.Element {
       )}
     </Form>
   );
+}
+
+function FormQueryStatePersist({ control }: Pick<UseFormReturn<IFormData>, 'control'>): null {
+  const navigate = Location.useNavigate<LocationGenerics>();
+  const { title, description, category } = useWatch({ control });
+
+  React.useEffect(() => {
+    navigate({
+      search: {
+        createNewFeedback: {
+          title,
+          description,
+          category,
+        },
+      },
+      replace: true,
+    });
+  }, [title, description, category, navigate]);
+
+  return null;
 }

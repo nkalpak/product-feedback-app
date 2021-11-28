@@ -30,6 +30,7 @@ export function ButtonBase({ prependIcon, children, ...delegated }: IButtonBaseP
     >
       <ThemeUi.Flex
         sx={{
+          justifyContent: 'center',
           alignItems: 'center',
           gap: 2,
         }}
