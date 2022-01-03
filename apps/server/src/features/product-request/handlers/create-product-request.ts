@@ -1,4 +1,6 @@
 import mysql from 'mysql2/promise';
+import middy from 'middy';
+import { cors } from 'middy/middlewares';
 import { Environment } from '../../../global/environment';
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { Api } from '@pfa/api';
@@ -12,10 +14,10 @@ const pool: mysql.Pool = mysql.createPool({
   port: Environment.Database.Port
 });
 
-async function createProductRequest(event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> {
+const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
     if (!event.body) return { statusCode: 400, body: 'Bad request' };
-    const { upvotes, category, title, description, status } = Api.ProductRequest.ProductRequestParser.parse(
+    const { upvotes, category, title, description, status } = Api.ProductRequest.ProductFeedbackParser.parse(
       JSON.parse(event.body)
     );
 
@@ -30,7 +32,7 @@ async function createProductRequest(event: APIGatewayProxyEvent): Promise<APIGat
 
     return {
       statusCode: 200,
-      body: JSON.stringify(result, null, 2),
+      body: JSON.stringify(result),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -42,6 +44,8 @@ async function createProductRequest(event: APIGatewayProxyEvent): Promise<APIGat
       body: 'Bad request'
     };
   }
-}
+};
+
+const createProductRequest = middy(handler).use(cors());
 
 export { createProductRequest };

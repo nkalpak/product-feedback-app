@@ -1,28 +1,31 @@
 import { z } from 'zod';
 declare const CategoryParser: z.ZodEnum<["feature", "ui", "ux", "enhancement", "bug"]>;
 declare type ICategory = z.infer<typeof CategoryParser>;
-declare const ProductRequestParser: z.ZodObject<{
+declare const StatusParser: z.ZodDefault<z.ZodEnum<["suggestion", "planned", "in-progress", "live"]>>;
+declare type IStatus = z.infer<typeof StatusParser>;
+declare const ProductFeedbackParser: z.ZodObject<{
     title: z.ZodString;
-    category: z.ZodString;
+    category: z.ZodEnum<["feature", "ui", "ux", "enhancement", "bug"]>;
     upvotes: z.ZodOptional<z.ZodNumber>;
-    status: z.ZodOptional<z.ZodString>;
+    status: z.ZodDefault<z.ZodEnum<["suggestion", "planned", "in-progress", "live"]>>;
     description: z.ZodString;
 }, "strip", z.ZodTypeAny, {
-    status?: string | undefined;
     upvotes?: number | undefined;
+    status: "suggestion" | "planned" | "in-progress" | "live";
     title: string;
-    category: string;
+    category: "feature" | "ui" | "ux" | "enhancement" | "bug";
     description: string;
 }, {
-    status?: string | undefined;
+    status?: "suggestion" | "planned" | "in-progress" | "live" | undefined;
     upvotes?: number | undefined;
     title: string;
-    category: string;
+    category: "feature" | "ui" | "ux" | "enhancement" | "bug";
     description: string;
 }>;
-declare type IProductRequest = z.infer<typeof ProductRequestParser>;
-interface IProductRequestEntity extends IProductRequest {
+declare type IProductFeedback = z.infer<typeof ProductFeedbackParser>;
+interface IProductFeedbackEntity extends IProductFeedback {
     id: number;
 }
-export { ProductRequestParser };
-export type { IProductRequestEntity, IProductRequest, ICategory };
+declare function createProductFeedback(request: Pick<IProductFeedback, 'title' | 'category' | 'description'>): Promise<IProductFeedbackEntity>;
+export { ProductFeedbackParser, createProductFeedback };
+export type { IProductFeedbackEntity, IProductFeedback, ICategory, IStatus };

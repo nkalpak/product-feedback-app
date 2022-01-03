@@ -7,6 +7,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   stage: dev
+  timeout: 30
   iam:
     role:
       statements:
@@ -34,12 +35,12 @@ functions:
       securityGroupIds:
         - sg-0f83d270911584b4c
       subnetIds:
-        - subnet-00564fda019d88698
-        - subnet-0046df74f473dbff1
-        - subnet-0df34d52d49b6c014
-        - subnet-0f93f5be6d905d401
-        - subnet-0077e3750c924d19d
         - subnet-0c6cb803a4b7db664
+        - subnet-0077e3750c924d19d
+        - subnet-0f93f5be6d905d401
+        - subnet-0df34d52d49b6c014
+        - subnet-0046df74f473dbff1
+        - subnet-00564fda019d88698
     events:
       - http:
           path: product-request/create

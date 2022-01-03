@@ -8,7 +8,7 @@ import { parseSearch, stringifySearch } from 'react-location-jsurl';
 export type LocationGenerics = MakeGenerics<{
   Search: {
     createNewFeedback: Partial<
-      Pick<Api.ProductRequest.IProductRequest, 'title' | 'description' | 'category'>
+      Pick<Api.ProductRequest.IProductFeedback, 'title' | 'description' | 'category'>
     >;
   };
 }>;

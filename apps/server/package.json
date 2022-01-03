@@ -14,7 +14,8 @@
     "typescript": "^4.4.3",
     "mysql2": "~2.3.3",
     "zod": "~3.11.6",
-    "@pfa/api": "^1.0.0"
+    "@pfa/api": "^1.0.0",
+    "middy": "~0.36.0"
   },
   "devDependencies": {
     "esbuild": "^0.13.4",

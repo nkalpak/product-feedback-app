@@ -7,8 +7,9 @@ import React from 'react';
 import { Button } from '@/components/button/button';
 import { UseFormReturn, useWatch } from 'react-hook-form';
 import { LocationGenerics } from '@/lib/react-location';
+import { ProductFeedbackService } from '@/features/product-feedback';
 
-type IFormData = Pick<Api.ProductRequest.IProductRequest, 'title' | 'category' | 'description'>;
+type IFormData = Pick<Api.ProductRequest.IProductFeedback, 'title' | 'category' | 'description'>;
 
 const categories: Record<Api.ProductRequest.ICategory, string> = {
   feature: 'Feature',
@@ -21,16 +22,25 @@ const categories: Record<Api.ProductRequest.ICategory, string> = {
 export function CreateNewFeedbackForm(): JSX.Element {
   const search = Location.useSearch<LocationGenerics>();
   const navigate = Location.useNavigate<LocationGenerics>();
+  const createProductFeedback = ProductFeedbackService.useCreateProductFeedback();
 
   function onCancel(): void {
     navigate({ to: '/' });
   }
 
+  function onSubmit({ description, category, title }: IFormData): void {
+    createProductFeedback.mutate({
+      title,
+      description,
+      category,
+    });
+  }
+
   return (
     <Form<IFormData>
-      schema={Api.ProductRequest.ProductRequestParser}
+      schema={Api.ProductRequest.ProductFeedbackParser}
       options={{ defaultValues: search.createNewFeedback }}
-      onSubmit={console.log}
+      onSubmit={onSubmit}
     >
       {({ register, control, formState }) => (
         <React.Fragment>

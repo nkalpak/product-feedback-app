@@ -1,20 +1,37 @@
 import { z } from 'zod';
+import { Environment } from '../global/environment';
 
 const CategoryParser = z.enum(['feature', 'ui', 'ux', 'enhancement', 'bug'] as const);
 type ICategory = z.infer<typeof CategoryParser>;
 
-const ProductRequestParser = z.object({
+const StatusParser = z.enum(['suggestion', 'planned', 'in-progress', 'live'] as const).default('suggestion');
+type IStatus = z.infer<typeof StatusParser>;
+
+const ProductFeedbackParser = z.object({
   title: z.string().min(1, 'Title is required'),
-  category: z.string().min(1, 'Category is required'),
+  category: CategoryParser,
   upvotes: z.number().optional(),
-  status: z.string().optional(),
+  status: StatusParser,
   description: z.string().min(1, 'Description is required')
 });
-type IProductRequest = z.infer<typeof ProductRequestParser>;
+type IProductFeedback = z.infer<typeof ProductFeedbackParser>;
 
-interface IProductRequestEntity extends IProductRequest {
+interface IProductFeedbackEntity extends IProductFeedback {
   id: number;
 }
 
-export { ProductRequestParser };
-export type { IProductRequestEntity, IProductRequest, ICategory };
+async function createProductFeedback(
+  request: Pick<IProductFeedback, 'title' | 'category' | 'description'>
+): Promise<IProductFeedbackEntity> {
+  const url = [Environment.API_URL, 'product-request/create'].join('/');
+  const response = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(request),
+    headers: { 'content-type': 'application/json' }
+  });
+
+  return response.json();
+}
+
+export { ProductFeedbackParser, createProductFeedback };
+export type { IProductFeedbackEntity, IProductFeedback, ICategory, IStatus };
