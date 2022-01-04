@@ -32,6 +32,11 @@ export function Button({
         },
         color: 'bluegrey',
         backgroundColor: BUTTON_BACKGROUND[color],
+
+        '&:disabled': {
+          backgroundColor: 'grey',
+          cursor: 'default',
+        },
       }}
     />
   );

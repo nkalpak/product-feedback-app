@@ -1,2 +1,3 @@
-import * as ProductRequest from './product-request';
-export { ProductRequest };
+import * as RawClient from '../api-client';
+declare const Auth: RawClient.AuthClient;
+export { RawClient, Auth };

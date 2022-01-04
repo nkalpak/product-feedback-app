@@ -9,6 +9,10 @@ module.exports = {
     'plugin:react-hooks/recommended',
   ],
   parserOptions: { tsconfigRootDir: __dirname },
+  rules: {
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@rushstack/typedef-var': 'off',
+  },
   overrides: [
     {
       files: ['**/*.ts', '**/*.tsx'],

@@ -2,16 +2,15 @@ import * as R from 'remeda';
 import * as ThemeUi from 'theme-ui';
 import * as Location from 'react-location';
 import { Form, InputField, SelectField, TextAreaField } from '@/components/form';
-import { Api } from '@pfa/api';
 import React from 'react';
 import { Button } from '@/components/button/button';
 import { UseFormReturn, useWatch } from 'react-hook-form';
 import { LocationGenerics } from '@/lib/react-location';
 import { ProductFeedbackService } from '@/features/product-feedback';
 
-type IFormData = Pick<Api.ProductRequest.IProductFeedback, 'title' | 'category' | 'description'>;
+type IFormData = any;
 
-const categories: Record<Api.ProductRequest.ICategory, string> = {
+const categories: Record<any, string> = {
   feature: 'Feature',
   bug: 'Bug',
   ui: 'UI',
@@ -25,7 +24,7 @@ export function CreateNewFeedbackForm(): JSX.Element {
   const createProductFeedback = ProductFeedbackService.useCreateProductFeedback();
 
   function onCancel(): void {
-    navigate({ to: '/' });
+    navigate({ to: '..' });
   }
 
   function onSubmit({ description, category, title }: IFormData): void {
@@ -37,11 +36,7 @@ export function CreateNewFeedbackForm(): JSX.Element {
   }
 
   return (
-    <Form<IFormData>
-      schema={Api.ProductRequest.ProductFeedbackParser}
-      options={{ defaultValues: search.createNewFeedback }}
-      onSubmit={onSubmit}
-    >
+    <Form<IFormData> options={{ defaultValues: search.createNewFeedback }} onSubmit={onSubmit}>
       {({ register, control, formState }) => (
         <React.Fragment>
           <FormQueryStatePersist control={control} />
