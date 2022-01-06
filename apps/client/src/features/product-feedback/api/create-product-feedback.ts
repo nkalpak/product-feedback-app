@@ -1,8 +1,21 @@
 import * as ReactQuery from 'react-query';
+import { Api } from '@pfa/api';
 import { InferMutationOptions } from '@/types/utils';
 
-function useCreateProductFeedback(options?: InferMutationOptions<any>) {
-  return ReactQuery.useMutation('a', async () => {}, options);
+async function createProductFeedbackApi(request: Api.RawClient.ProductRequestCreateRequest) {
+  return Api.ProductRequest.create({
+    ...request,
+    ...(request.status && {
+      status: Number(request.status),
+    }),
+    ...(request.category && {
+      category: Number(request.category),
+    }),
+  });
+}
+
+function useCreateProductFeedback(options?: InferMutationOptions<typeof createProductFeedbackApi>) {
+  return ReactQuery.useMutation(createProductFeedbackApi, options);
 }
 
 export { useCreateProductFeedback };

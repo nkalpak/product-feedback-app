@@ -1,22 +1,30 @@
 import * as R from 'remeda';
 import * as ThemeUi from 'theme-ui';
 import * as Location from 'react-location';
+import { Api } from '@pfa/api';
 import { Form, InputField, SelectField, TextAreaField } from '@/components/form';
 import React from 'react';
 import { Button } from '@/components/button/button';
 import { UseFormReturn, useWatch } from 'react-hook-form';
 import { LocationGenerics } from '@/lib/react-location';
 import { ProductFeedbackService } from '@/features/product-feedback';
+import { z } from 'zod';
 
-type IFormData = any;
+type IFormData = Api.RawClient.ProductRequestCreateRequest;
 
-const categories: Record<any, string> = {
-  feature: 'Feature',
-  bug: 'Bug',
-  ui: 'UI',
-  ux: 'UX',
-  enhancement: 'Enhancement',
+const categories: Record<Api.RawClient.ProductRequestCategory, string> = {
+  [Api.RawClient.ProductRequestCategory.Feature]: 'Feature',
+  [Api.RawClient.ProductRequestCategory.Bug]: 'Bug',
+  [Api.RawClient.ProductRequestCategory.Ui]: 'UI',
+  [Api.RawClient.ProductRequestCategory.Ux]: 'UX',
+  [Api.RawClient.ProductRequestCategory.Enhancement]: 'Enhancement',
 };
+
+const schema = z.object({
+  title: z.string().min(1, 'Title is required.'),
+  category: z.string(),
+  description: z.string(),
+});
 
 export function CreateNewFeedbackForm(): JSX.Element {
   const search = Location.useSearch<LocationGenerics>();
@@ -27,16 +35,16 @@ export function CreateNewFeedbackForm(): JSX.Element {
     navigate({ to: '..' });
   }
 
-  function onSubmit({ description, category, title }: IFormData): void {
-    createProductFeedback.mutate({
-      title,
-      description,
-      category,
-    });
+  function onSubmit(data: IFormData): void {
+    createProductFeedback.mutate(data);
   }
 
   return (
-    <Form<IFormData> options={{ defaultValues: search.createNewFeedback }} onSubmit={onSubmit}>
+    <Form<IFormData>
+      schema={schema}
+      options={{ defaultValues: search.createNewFeedback }}
+      onSubmit={onSubmit}
+    >
       {({ register, control, formState }) => (
         <React.Fragment>
           <FormQueryStatePersist control={control} />
@@ -51,7 +59,7 @@ export function CreateNewFeedbackForm(): JSX.Element {
           <SelectField
             label="Category"
             description="Choose a category for your feedback"
-            defaultValue="feature"
+            defaultValue={String(Api.RawClient.ProductRequestCategory.Feature)}
             options={R.toPairs(categories).map(([value, label]) => ({
               label,
               value,
