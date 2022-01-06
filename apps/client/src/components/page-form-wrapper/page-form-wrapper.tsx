@@ -16,7 +16,6 @@ export function PageFormWrapper({ children, title, icon }: IPageFormWrapperProps
       <GoBackButton sx={{ pl: 0 }} />
 
       <ThemeUi.Box
-        variant="pageForm"
         sx={{
           mt: 8,
           position: 'relative',

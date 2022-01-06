@@ -1,23 +1,24 @@
+import * as ThemeUi from 'theme-ui';
 import * as React from 'react';
-import { Link } from 'react-location';
+import { ProductFeedbackService } from '@/features/product-feedback';
+import { RelativeLoadingIndicator } from '@/components/loading-indicator/relative-loading-indicator';
+import { isQueryLoading } from '@/utils/react-query/is-query-loading';
+import { ProductRequestCard } from '@/features/product-feedback/components';
 
 export function Home(): JSX.Element {
-  async function handleSignIn() {
-    try {
-      const response = await fetch('https://localhost:7174/api/ProductRequest/Authenticate');
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
+  const getAllProductFeedbacks = ProductFeedbackService.useGetAllProductFeedbacks();
+
+  if (isQueryLoading(getAllProductFeedbacks.isLoading, getAllProductFeedbacks.data)) {
+    return <RelativeLoadingIndicator loadingText="Preparing your home page..." />;
   }
 
   return (
-    <React.Fragment>
-      <Link to="/create-new-feedback">Home!!</Link>
-
-      <div>
-        <button onClick={handleSignIn}>Sign in</button>
-      </div>
-    </React.Fragment>
+    <ThemeUi.Container sx={{ p: 4 }}>
+      <ThemeUi.Flex sx={{ flexDirection: 'column', gap: 4 }}>
+        {getAllProductFeedbacks.data.map((productFeedback) => (
+          <ProductRequestCard key={productFeedback.id} {...productFeedback} />
+        ))}
+      </ThemeUi.Flex>
+    </ThemeUi.Container>
   );
 }

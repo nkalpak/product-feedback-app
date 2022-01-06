@@ -9,16 +9,9 @@ import { UseFormReturn, useWatch } from 'react-hook-form';
 import { LocationGenerics } from '@/lib/react-location';
 import { ProductFeedbackService } from '@/features/product-feedback';
 import { z } from 'zod';
+import { ProductRequestCategories } from '@/features/product-feedback/utils/product-request-categories';
 
 type IFormData = Api.RawClient.ProductRequestCreateRequest;
-
-const categories: Record<Api.RawClient.ProductRequestCategory, string> = {
-  [Api.RawClient.ProductRequestCategory.Feature]: 'Feature',
-  [Api.RawClient.ProductRequestCategory.Bug]: 'Bug',
-  [Api.RawClient.ProductRequestCategory.Ui]: 'UI',
-  [Api.RawClient.ProductRequestCategory.Ux]: 'UX',
-  [Api.RawClient.ProductRequestCategory.Enhancement]: 'Enhancement',
-};
 
 const schema = z.object({
   title: z.string().min(1, 'Title is required.'),
@@ -60,7 +53,7 @@ export function CreateNewFeedbackForm(): JSX.Element {
             label="Category"
             description="Choose a category for your feedback"
             defaultValue={String(Api.RawClient.ProductRequestCategory.Feature)}
-            options={R.toPairs(categories).map(([value, label]) => ({
+            options={R.toPairs(ProductRequestCategories).map(([value, label]) => ({
               label,
               value,
             }))}

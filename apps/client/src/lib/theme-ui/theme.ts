@@ -146,4 +146,19 @@ export const theme: Theme = {
       mx: [6, 'auto'],
     },
   },
+
+  badges: {
+    toggle: {
+      border: 'none',
+
+      color: 'secondary',
+      borderRadius: '10px',
+      py: 2,
+      px: 4,
+      backgroundColor: 'bluegrey',
+      fontFamily: 'body',
+      fontWeight: 700,
+      fontSize: `${13 / 16}rem`,
+    },
+  },
 };
