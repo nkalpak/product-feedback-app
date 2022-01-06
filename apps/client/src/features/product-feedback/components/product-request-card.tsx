@@ -11,7 +11,10 @@ interface IProductRequestCardProps
   extends Pick<
     Api.RawClient.ProductRequestDto,
     'title' | 'description' | 'category' | 'upvotes' | 'comments'
-  > {}
+  > {
+  hasCurrentUserUpvoted: boolean;
+  onVoteChange: () => void;
+}
 
 export function ProductRequestCard({
   title,
@@ -19,6 +22,8 @@ export function ProductRequestCard({
   category,
   comments,
   upvotes,
+  hasCurrentUserUpvoted,
+  onVoteChange,
 }: IProductRequestCardProps) {
   return (
     <Wrapper>
@@ -34,7 +39,11 @@ export function ProductRequestCard({
       </ThemeUi.Box>
 
       <ThemeUi.Flex sx={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
-        <ToggleHorizontal prependIcon={<ChevronUp width={16} strokeWidth={3} />}>
+        <ToggleHorizontal
+          onPressedChange={() => onVoteChange()}
+          pressed={hasCurrentUserUpvoted}
+          prependIcon={<ChevronUp width={16} strokeWidth={3} />}
+        >
           <Typography kind="body1" sx={{ fontWeight: 'inherit' }}>
             {upvotes}
           </Typography>

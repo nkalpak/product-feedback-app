@@ -12,6 +12,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@rushstack/typedef-var': 'off',
+    'react/jsx-no-bind': 'off',
   },
   overrides: [
     {

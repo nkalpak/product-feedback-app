@@ -17,6 +17,45 @@ export class ProductRequestClient {
         this.baseUrl = baseUrl !== undefined && baseUrl !== null ? baseUrl : "https://localhost:7047";
     }
 
+    vote(id: string, direction: ProductRequestVoteDirection | undefined): Promise<FileResponse> {
+        let url_ = this.baseUrl + "/api/product_request/vote/{id}?";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined.");
+        url_ = url_.replace("{id}", encodeURIComponent("" + id));
+        if (direction === null)
+            throw new Error("The parameter 'direction' cannot be null.");
+        else if (direction !== undefined)
+            url_ += "direction=" + encodeURIComponent("" + direction) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <RequestInit>{
+            method: "POST",
+            headers: {
+                "Accept": "application/octet-stream"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processVote(_response);
+        });
+    }
+
+    protected processVote(response: Response): Promise<FileResponse> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200 || status === 206) {
+            const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+            const fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+            const fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+            return response.blob().then(blob => { return { fileName: fileName, data: blob, status: status, headers: _headers }; });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<FileResponse>(<any>null);
+    }
+
     create(request: ProductRequestCreateRequest): Promise<ProductRequestDto> {
         let url_ = this.baseUrl + "/api/product_request";
         url_ = url_.replace(/[?&]$/, "");
@@ -209,6 +248,11 @@ export class AuthClient {
     }
 }
 
+export enum ProductRequestVoteDirection {
+    Upvote = 1,
+    Downvote = -1,
+}
+
 export interface ProductRequestDto {
     id: string;
     title: string;
@@ -217,6 +261,7 @@ export interface ProductRequestDto {
     status: ProductRequestStatus;
     description?: string;
     comments: CommentDto[];
+    hasCurrentUserUpvoted: boolean;
 }
 
 export enum ProductRequestCategory {
@@ -268,6 +313,13 @@ export interface RegisterResponseModel {
 export interface RegisterRequestModel {
     username: string;
     password: string;
+}
+
+export interface FileResponse {
+    data: Blob;
+    status: number;
+    fileName?: string;
+    headers?: { [name: string]: any };
 }
 
 export class ApiException extends Error {

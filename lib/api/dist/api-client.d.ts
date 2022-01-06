@@ -5,6 +5,8 @@ export declare class ProductRequestClient {
     constructor(baseUrl?: string, http?: {
         fetch(url: RequestInfo, init?: RequestInit): Promise<Response>;
     });
+    vote(id: string, direction: ProductRequestVoteDirection | undefined): Promise<FileResponse>;
+    protected processVote(response: Response): Promise<FileResponse>;
     create(request: ProductRequestCreateRequest): Promise<ProductRequestDto>;
     protected processCreate(response: Response): Promise<ProductRequestDto>;
     getAll(): Promise<ProductRequestDto[]>;
@@ -24,6 +26,10 @@ export declare class AuthClient {
     register(request: RegisterRequestModel): Promise<RegisterResponseModel>;
     protected processRegister(response: Response): Promise<RegisterResponseModel>;
 }
+export declare enum ProductRequestVoteDirection {
+    Upvote = 1,
+    Downvote = -1
+}
 export interface ProductRequestDto {
     id: string;
     title: string;
@@ -32,6 +38,7 @@ export interface ProductRequestDto {
     status: ProductRequestStatus;
     description?: string;
     comments: CommentDto[];
+    hasCurrentUserUpvoted: boolean;
 }
 export declare enum ProductRequestCategory {
     Feature = 1,
@@ -74,6 +81,14 @@ export interface RegisterResponseModel {
 export interface RegisterRequestModel {
     username: string;
     password: string;
+}
+export interface FileResponse {
+    data: Blob;
+    status: number;
+    fileName?: string;
+    headers?: {
+        [name: string]: any;
+    };
 }
 export declare class ApiException extends Error {
     message: string;
