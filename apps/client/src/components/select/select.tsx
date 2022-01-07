@@ -2,14 +2,10 @@
 import * as ThemeUi from 'theme-ui';
 import React from 'react';
 import { ChevronDownIcon } from '@modulz/radix-icons';
-
-interface IOption {
-  label: string | React.ReactNode;
-  value: string;
-}
+import { ISelectOption } from '@/components/select/types';
 
 interface ISelectProps extends ThemeUi.SelectProps {
-  options: IOption[];
+  options: ISelectOption[];
 }
 
 export function Select({
