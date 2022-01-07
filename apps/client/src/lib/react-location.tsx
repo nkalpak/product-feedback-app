@@ -10,11 +10,16 @@ import React from 'react';
 import { ProductFeedbackRoutes } from '@/features/product-feedback';
 import { parseSearch, stringifySearch } from 'react-location-jsurl';
 import { AuthRoutes, AuthUtils } from '@/features/auth';
+import { Api } from '@pfa/api';
+import { Flex } from 'theme-ui';
 
 export type LocationGenerics = MakeGenerics<{
   Search: {
-    createNewFeedback: Partial<any>;
+    createNewFeedback: Partial<Api.RawClient.ProductRequestDto>;
     code?: string;
+    homeView: {
+      sortBy?: Api.RawClient.ProductRequestSortBy;
+    };
   };
 }>;
 
@@ -26,13 +31,21 @@ const location: ReactLocation = new ReactLocation({
 function Auth() {
   const { accessToken } = AuthUtils.useAuthStorage();
 
-  return accessToken ? <Outlet /> : <AuthRoutes.Login />;
+  return (
+    <Flex sx={{ flexDirection: 'column', flexGrow: 1 }}>
+      {accessToken ? <Outlet /> : <AuthRoutes.Login />}
+    </Flex>
+  );
 }
 
 function NotAuth() {
   const { accessToken } = AuthUtils.useAuthStorage();
 
-  return accessToken ? <HomeRoutes.Home /> : <Outlet />;
+  return (
+    <Flex sx={{ flexDirection: 'column', flexGrow: 1 }}>
+      {accessToken ? <HomeRoutes.Home /> : <Outlet />}
+    </Flex>
+  );
 }
 
 const routes: Route<LocationGenerics>[] = [
@@ -54,13 +67,24 @@ const routes: Route<LocationGenerics>[] = [
   {
     path: '/',
     element: <Auth />,
+    searchFilters: [
+      (prev, next) => ({
+        ...next,
+        homeView: {
+          ...prev.homeView,
+          ...next.homeView,
+        },
+      }),
+    ],
     children: [
       {
         path: '/create-new-feedback',
         element: <ProductFeedbackRoutes.CreateNewFeedback />,
       },
       { path: '/home', element: <HomeRoutes.Home /> },
-      { element: <HomeRoutes.Home /> },
+      {
+        element: <HomeRoutes.Home />,
+      },
     ],
   },
 ];

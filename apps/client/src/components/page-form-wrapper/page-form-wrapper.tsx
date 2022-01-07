@@ -12,8 +12,16 @@ interface IPageFormWrapperProps {
 
 export function PageFormWrapper({ children, title, icon }: IPageFormWrapperProps): JSX.Element {
   return (
-    <ThemeUi.Container variant="pageForm" sx={{ alignSelf: 'center' }}>
-      <GoBackButton sx={{ pl: 0 }} />
+    <ThemeUi.Container
+      variant="pageForm"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        flexGrow: 1,
+        justifyContent: 'center',
+      }}
+    >
+      <GoBackButton sx={{ pl: 0, alignSelf: 'flex-start' }} />
 
       <ThemeUi.Box
         sx={{
@@ -25,6 +33,12 @@ export function PageFormWrapper({ children, title, icon }: IPageFormWrapperProps
           pt: 44,
         }}
       >
+        <Typography kind="h3" sx={{ color: 'darkgrey.medium', textTransform: 'capitalize', mb: 6 }}>
+          {title}
+        </Typography>
+
+        {children}
+
         <ThemeUi.Box
           sx={{
             position: 'absolute',
@@ -43,12 +57,6 @@ export function PageFormWrapper({ children, title, icon }: IPageFormWrapperProps
         >
           {icon}
         </ThemeUi.Box>
-
-        <Typography kind="h3" sx={{ color: 'darkgrey.medium', textTransform: 'capitalize', mb: 6 }}>
-          {title}
-        </Typography>
-
-        {children}
       </ThemeUi.Box>
     </ThemeUi.Container>
   );

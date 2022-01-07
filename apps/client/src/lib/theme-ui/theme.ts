@@ -65,11 +65,11 @@ export const theme: Theme = {
   },
 
   fontSizes: {
-    xs: `${12 / 16}rem`,
-    sm: `${14 / 16}rem`,
-    md: `${16 / 16}rem`,
-    lg: `${18 / 16}rem`,
-    xl: `${20 / 16}rem`,
+    xs: `${11 / 16}rem`,
+    sm: `${13 / 16}rem`,
+    md: `${15 / 16}rem`,
+    lg: `${17 / 16}rem`,
+    xl: `${19 / 16}rem`,
     '2xl': `${24 / 16}rem`,
   },
 
@@ -106,19 +106,19 @@ export const theme: Theme = {
     body1: {
       fontFamily: 'body',
       fontWeight: 400,
-      fontSize: 'md',
+      fontSize: `${16 / 16}rem`,
       lineHeight: '23px',
     },
     body2: {
       fontFamily: 'body',
       fontWeight: 400,
-      fontSize: `${15 / 16}rem`,
+      fontSize: 'md',
       lineHeight: '22px',
     },
     body3: {
       fontFamily: 'body',
       fontWeight: 600,
-      fontSize: `${13 / 16}rem`,
+      fontSize: 'sm',
       lineHeight: '19px',
     },
   },
@@ -143,7 +143,7 @@ export const theme: Theme = {
     pageForm: {
       alignSelf: 'center',
       maxWidth: 540,
-      mx: [6, 'auto'],
+      px: [6, 'auto'],
     },
   },
 

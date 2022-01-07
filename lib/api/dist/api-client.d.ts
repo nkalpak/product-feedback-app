@@ -9,7 +9,7 @@ export declare class ProductRequestClient {
     protected processVote(response: Response): Promise<FileResponse>;
     create(request: ProductRequestCreateRequest): Promise<ProductRequestDto>;
     protected processCreate(response: Response): Promise<ProductRequestDto>;
-    getAll(): Promise<ProductRequestDto[]>;
+    getAll(sortBy: ProductRequestSortBy | undefined): Promise<ProductRequestDto[]>;
     protected processGetAll(response: Response): Promise<ProductRequestDto[]>;
     get(id: string | null): Promise<ProductRequestDto>;
     protected processGet(response: Response): Promise<ProductRequestDto>;
@@ -67,6 +67,10 @@ export interface ProductRequestCreateRequest {
     category: ProductRequestCategory;
     status: ProductRequestStatus;
     description?: string;
+}
+export declare enum ProductRequestSortBy {
+    MostUpvotes = 0,
+    MostComments = 1
 }
 export interface LoginResponseModel {
     accessToken: string;

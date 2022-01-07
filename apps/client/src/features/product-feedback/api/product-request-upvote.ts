@@ -19,11 +19,11 @@ export function useProductRequestUpvote(
   return ReactQuery.useMutation(productRequestUpvoteApi, {
     ...options,
     onMutate: async (variables) => {
-      const oldProductRequests = queryClient.getQueryData<Api.RawClient.ProductRequestDto[]>(
+      const oldProductRequests = queryClient.getQueriesData<Api.RawClient.ProductRequestDto[]>(
         productRequestKeys.all
       );
 
-      queryClient.setQueryData<Api.RawClient.ProductRequestDto[]>(
+      queryClient.setQueriesData<Api.RawClient.ProductRequestDto[]>(
         productRequestKeys.all,
         (oldProductRequests) => {
           if (!oldProductRequests) return [];
@@ -39,7 +39,8 @@ export function useProductRequestUpvote(
         }
       );
 
-      return () => queryClient.setQueryData(productRequestKeys.all, oldProductRequests);
+      return () =>
+        oldProductRequests.forEach(([key, values]) => queryClient.setQueryData(key, values));
     },
     onSuccess: async (data, variables, context) => {
       await options?.onSuccess?.(data, variables, context);

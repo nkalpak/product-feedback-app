@@ -11,29 +11,27 @@ interface ISelectProps extends ThemeUi.SelectProps {
 }
 
 export function SelectGhost({ options, label, value, sx, ...delegated }: ISelectProps) {
-  const selectedOption = options.find((option) => option.value === value);
+  const selectedOption = options.find((option) => option.value === String(value));
 
   return (
-    <ThemeUi.Label sx={{ isolation: 'isolate', position: 'relative', width: 'fit-content', ...sx }}>
-      <Typography kind="body2">{label}</Typography>
-      {selectedOption && (
-        <ThemeUi.Flex sx={{ ml: 2 }}>
-          <Typography kind="body2" sx={{ fontWeight: 800 }}>
-            {selectedOption.label}
-          </Typography>
-
-          <ChevronDown
-            strokeWidth={3}
-            width={16}
-            sx={{
-              ml: 1,
-            }}
-          />
-        </ThemeUi.Flex>
-      )}
-
+    <ThemeUi.Label
+      sx={{
+        isolation: 'isolate',
+        position: 'relative',
+        width: 'fit-content',
+        display: 'flex',
+        alignItems: 'center',
+        ...sx,
+      }}
+    >
       <select
+        value={value}
         sx={{
+          '&:active, &:focus + div': {
+            outline: '2px solid',
+            outlineColor: 'secondary',
+          },
+
           border: 'none',
           width: '100%',
           height: '100%',
@@ -48,6 +46,27 @@ export function SelectGhost({ options, label, value, sx, ...delegated }: ISelect
           </option>
         ))}
       </select>
+
+      <ThemeUi.Flex sx={{ alignItems: 'center' }}>
+        <Typography kind="body3" sx={{ fontWeight: 400 }}>
+          {label}
+        </Typography>
+        {selectedOption && (
+          <ThemeUi.Flex sx={{ ml: 2, alignItems: 'center' }}>
+            <Typography kind="body3" sx={{ fontWeight: 800 }}>
+              {selectedOption.label}
+            </Typography>
+
+            <ChevronDown
+              strokeWidth={3}
+              width={16}
+              sx={{
+                ml: 1,
+              }}
+            />
+          </ThemeUi.Flex>
+        )}
+      </ThemeUi.Flex>
     </ThemeUi.Label>
   );
 }

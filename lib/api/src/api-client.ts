@@ -93,8 +93,12 @@ export class ProductRequestClient {
         return Promise.resolve<ProductRequestDto>(<any>null);
     }
 
-    getAll(): Promise<ProductRequestDto[]> {
-        let url_ = this.baseUrl + "/api/product_request";
+    getAll(sortBy: ProductRequestSortBy | undefined): Promise<ProductRequestDto[]> {
+        let url_ = this.baseUrl + "/api/product_request?";
+        if (sortBy === null)
+            throw new Error("The parameter 'sortBy' cannot be null.");
+        else if (sortBy !== undefined)
+            url_ += "sortBy=" + encodeURIComponent("" + sortBy) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -295,6 +299,11 @@ export interface ProductRequestCreateRequest {
     category: ProductRequestCategory;
     status: ProductRequestStatus;
     description?: string;
+}
+
+export enum ProductRequestSortBy {
+    MostUpvotes = 0,
+    MostComments = 1,
 }
 
 export interface LoginResponseModel {

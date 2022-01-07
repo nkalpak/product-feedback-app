@@ -10,6 +10,7 @@ import { LocationGenerics } from '@/lib/react-location';
 import { ProductFeedbackService } from '@/features/product-feedback';
 import { z } from 'zod';
 import { ProductRequestCategories } from '@/features/product-feedback/utils/product-request-categories';
+import { RelativeLoadingIndicator } from '@/components/loading-indicator/relative-loading-indicator';
 
 type IFormData = Api.RawClient.ProductRequestCreateRequest;
 
@@ -22,10 +23,16 @@ const schema = z.object({
 export function CreateNewFeedbackForm(): JSX.Element {
   const search = Location.useSearch<LocationGenerics>();
   const navigate = Location.useNavigate<LocationGenerics>();
-  const createProductFeedback = ProductFeedbackService.useCreateProductFeedback();
+  const createProductFeedback = ProductFeedbackService.useCreateProductFeedback({
+    onSuccess: () => {
+      navigate({ to: '../' });
+    },
+  });
 
   function onCancel(): void {
-    navigate({ to: '..' });
+    navigate({
+      to: '..',
+    });
   }
 
   function onSubmit(data: IFormData): void {
@@ -68,6 +75,10 @@ export function CreateNewFeedbackForm(): JSX.Element {
             description="Include any specific comments on what should be improved, added, etc."
           />
 
+          {createProductFeedback.isLoading && (
+            <RelativeLoadingIndicator loadingText="Creating your feedback..." />
+          )}
+
           <ThemeUi.Flex
             sx={{
               gap: 4,
@@ -92,13 +103,14 @@ function FormQueryStatePersist({ control }: Pick<UseFormReturn<IFormData>, 'cont
 
   React.useEffect(() => {
     navigate({
-      search: {
+      search: (prev) => ({
+        ...prev,
         createNewFeedback: {
           title,
           description,
           category,
         },
-      },
+      }),
       replace: true,
     });
   }, [title, description, category, navigate]);

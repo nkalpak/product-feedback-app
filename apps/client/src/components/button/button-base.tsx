@@ -15,13 +15,13 @@ export function ButtonBase({ prependIcon, children, ...delegated }: IButtonBaseP
         ...delegated.sx,
 
         fontFamily: 'body',
-        px: 6,
+        px: 4,
         /*
          * Icon adds a bit of whitespace to the left
          * so when it's present, we micro-adjust the
          * padding so that it is the same as on the right.
          * */
-        pl: prependIcon ? '19px' : 6,
+        pl: prependIcon ? '16px' : 4,
         fontWeight: 700,
         fontSize: 'sm',
         textTransform: 'capitalize',
