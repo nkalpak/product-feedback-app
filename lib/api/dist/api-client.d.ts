@@ -9,7 +9,7 @@ export declare class ProductRequestClient {
     protected processVote(response: Response): Promise<FileResponse>;
     create(request: ProductRequestCreateRequest): Promise<ProductRequestDto>;
     protected processCreate(response: Response): Promise<ProductRequestDto>;
-    getAll(sortBy: ProductRequestSortBy | undefined): Promise<ProductRequestDto[]>;
+    getAll(sortBy: ProductRequestSortBy | undefined, filterBy: string | null | undefined): Promise<ProductRequestDto[]>;
     protected processGetAll(response: Response): Promise<ProductRequestDto[]>;
     get(id: string | null): Promise<ProductRequestDto>;
     protected processGet(response: Response): Promise<ProductRequestDto>;

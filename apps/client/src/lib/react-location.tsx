@@ -19,6 +19,7 @@ export type LocationGenerics = MakeGenerics<{
     code?: string;
     homeView: {
       sortBy?: Api.RawClient.ProductRequestSortBy;
+      filterBy?: Api.RawClient.ProductRequestCategory[];
     };
   };
 }>;

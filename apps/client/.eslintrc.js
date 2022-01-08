@@ -13,6 +13,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@rushstack/typedef-var': 'off',
     'react/jsx-no-bind': 'off',
+    '@typescript-eslint/typedef': 'off',
   },
   overrides: [
     {

@@ -93,12 +93,14 @@ export class ProductRequestClient {
         return Promise.resolve<ProductRequestDto>(<any>null);
     }
 
-    getAll(sortBy: ProductRequestSortBy | undefined): Promise<ProductRequestDto[]> {
+    getAll(sortBy: ProductRequestSortBy | undefined, filterBy: string | null | undefined): Promise<ProductRequestDto[]> {
         let url_ = this.baseUrl + "/api/product_request?";
         if (sortBy === null)
             throw new Error("The parameter 'sortBy' cannot be null.");
         else if (sortBy !== undefined)
             url_ += "sortBy=" + encodeURIComponent("" + sortBy) + "&";
+        if (filterBy !== undefined && filterBy !== null)
+            url_ += "filterBy=" + encodeURIComponent("" + filterBy) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
